@@ -55,46 +55,28 @@ pairs(Fishies)
 ```
 
 
-```{r}
-Fishies=filter(Fishdata, Species =="Bream")
-Fishies=select(Fishies,-Species)
-pairs(Fishies)
-```
 
-```{r}
-Fishies=filter(Fishdata, Species =="Smelt")
-Fishies=select(Fishies,-Species)
-pairs(Fishies)
-```
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ### Numerical Descriptive Results
-```{r}
-summary(Fishies)
-```
 
 ```{r}
 summary(Fishies)
 ```
 
-```{r}
-summary(Fishies)
-```
+
 
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ```{r}
-Breammodel=lm(Weight~Length2+Width,data=Fishies)
-summary(Breammodel)
+Perchmodel=lm(Weight~Length2+Width,data=Fishies)
+summary(Perchmodel)
 
 ```
 
-```{r}
-Smeltmodel=lm(Weight~Length2+Width,data=Fishies)
-summary(Smeltmodel)
-```
+
 
 ```{r}
 library(leaps)
@@ -112,21 +94,6 @@ library(car)
 subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 
-```{r}
-library(leaps)
-regsubsets.out <-
-    regsubsets(Weight ~ .,
-               data = Fishies,
-               nbest = 1,       # 1 best model for each number of predictors
-               nvmax = NULL,    # NULL for no limit on number of variables
-               force.in = NULL, force.out = NULL,
-               method = "exhaustive")
-
-summary.out <- summary(regsubsets.out)
-as.data.frame(summary.out$outmat)
-library(car)
-subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
-```
 
 
 ## Inferential Results
