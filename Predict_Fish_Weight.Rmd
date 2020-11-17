@@ -49,7 +49,8 @@ Fishies=filter(Fishdata, Species =="Perch")
 Fishies=select(Fishies,-Species)
 pairs(Fishies)
 ``` 
-The best plot for the  linear model of species "Perch" according to the above chart appears to be Length 2
+The best plot for the  linear model of species "Perch" according to the above 
+chart appears to be Length 2
 
 ### Numerical Descriptive Results for Perch
 
@@ -60,12 +61,19 @@ The best plot for the  linear model of species "Perch" according to the above ch
 summary(Fishies)
 ```
 
+In the above numerical graphs for Perch the summary chart appears to show the 
+Max. weight of 1100.0 oz   Max. Length of 44.00 for the lm for length2, a
+Max. Height of 12.800 in. and a Max. width of 8.142 in
 
 
 ```{r}
 Perchmodel=lm(Weight~Length2+Width,data=Fishies)
 summary(Perchmodel)
 ```
+
+
+The perch model shows an adj r-squared prediction of 0.9341 which is pretty close
+to our highest regression.
 
 ```{r}
 library(leaps)
@@ -82,13 +90,6 @@ as.data.frame(summary.out$outmat)
 library(car)
 subsets(regsubsets.out, statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
-
-In the above numerical graphs for Perch the summary chart appears to show the 
-Max. weight of 1100.0 oz   Max. Length of 44.00 for the lm for length2, a
-Max. Height of 12.800 in. and a Max. width of 8.142 in
-
-The perch model shows an adj r-squared prediction of 0.9341 which is pretty close
-to our highest regression.
 
 In the above subset model it appears that subset size 2 @ 0.9400 adjr2 
 calculates that Height and width give the best  predictor of models.
@@ -159,7 +160,7 @@ subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2
 
 In the subset chart above we can see at a subset size of 2 variables that 
 Length2 and Height would be the best model to predict the results.  
-It appears we have an adjr2 score of 0.934 with a multiple rsquare of 0.9137. 
+It appears we have an adjr2 score of 0.934.
 
 
 ## Inferential Results for Bream
@@ -200,7 +201,7 @@ Length3 lm.  and a max Height of 2.9 in. and a max Width of 2.1 in.
 
 
 ```{r}
-Smeltmodel3=lm(Weight~Length3+ Width,data=FishiesS)
+Smeltmodel3=lm(Weight~Length3 + Width,data=FishiesS)
 summary(Smeltmodel3)
 ```
 
@@ -241,3 +242,39 @@ The inferntial chart above for Smelt appears to also have an adjr2 of 0.9551.
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variables causes the other, or whether they perhaps are related for some other reason.  Watch the chapter 6 videos from the George Town videos collection.!-->
+
+In conclusion the best regression model appears to be as follows.
+
+# Conclusion for Perch
+
+For the Perch species it appears the best regression model in scatter
+plots is that of variable Length2 and appears to be the best variable to use, 
+along with weight and adding width.
+Using these variables for our summary perch model1 and our sub-set models, 
+it would appear that the best model to use would be the subset model with an 
+adjr2 0f 0.9400.  
+
+For the Bream species it appears the best regression model would include 
+the variable Length1 along with the variables Weight and width.
+Using these variables for our summary Bream model2 and our sub-set models, 
+it would appear that the best model to use would be the subset model with an 
+adjr2 0f 0.934. The Breammodel2 and the Inferential test had an adjr2 of 0.9084.
+
+For the Smelt species, it appears the best regression model in scatter
+plots is that of variable Length3 and appears to be the best variable to use, 
+along with weight and adding width.
+Using these variables for our summary Smeltmodel3 and our sub-set models, 
+it would appear that the best model to use would be the subset model with an 
+adjr2 0f 0.965.  However, this model uses the variable Length2 rather than the
+variable Length3.  The models smeltmodel2 and the inferential model show a lower 
+adjr2 of 0.9551 which is lower than the 0.965 from the subset model.
+
+It appears that the best model for all three species was the subset adjr2 
+models.
+
+
+
+
+
+
+
