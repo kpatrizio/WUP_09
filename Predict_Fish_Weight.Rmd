@@ -13,32 +13,25 @@ output:
 require(tigerstats)
 require(tidyverse)
 ```
+
 ```{r}
 Fishdata=read.csv("Fish.csv", header = TRUE)
-
 ```
+
 
 # Introduction
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?!-->
 
-
-
 ## Build the best regression model you can that predicts the weight of perch
 ## Using only two predictor variables 
-
-
-
-we are using num~num because the variables we are looking at are all numerical explanatory variables.
-
-
-
-
 
 
 # Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
+
+we are using num~num because the variables we are looking at are all numerical explanatory variables.
 
 #Results
 
@@ -46,7 +39,10 @@ we are using num~num because the variables we are looking at are all numerical e
 
 ## Descriptive Results
 
-### Graphical Descriptive Results
+### Graphical Descriptive Results for Perch
+
+<!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+
 
 ```{r}
 Fishies=filter(Fishdata, Species =="Perch")
@@ -54,52 +50,23 @@ Fishies=select(Fishies,-Species)
 pairs(Fishies)
 ```
 
-```{r}
-FishiesB=filter(Fishdata, Species =="Bream")
-FishiesB=select(FishiesB,-Species)
-pairs(FishiesB)
-```
 
-```{r}
-FishiesS=filter(Fishdata, Species =="Smelt")
-FishiesS=select(FishiesS,-Species)
-pairs(FishiesS)
-```
 
-<!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
-### Numerical Descriptive Results
+### Numerical Descriptive Results for Perch
+
+<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+
 
 ```{r}
 summary(Fishies)
 ```
 
 
-```{r}
-summary(FishiesB)
-```
-
-
-```{r}
-summary(FishiesS)
-```
-<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ```{r}
 Perchmodel=lm(Weight~Length2+Width,data=Fishies)
 summary(Perchmodel)
-
-```
-
-```{r}
-Breammodel2=lm(Weight~Length1+ Width,data=FishiesB)
-summary(Breammodel2)
-```
-
-
-```{r}
-Smeltmodel3=lm(Weight~Length3+ Width,data=FishiesS)
-summary(Smeltmodel3)
 ```
 
 ```{r}
@@ -115,46 +82,19 @@ regsubsets.out <-
 summary.out <- summary(regsubsets.out)
 as.data.frame(summary.out$outmat)
 library(car)
-subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
-```
-
-```{r}
-library(leaps)
-regsubsets.out <-
-    regsubsets(Weight ~ .,
-               data = FishiesB,
-               nbest = 1,       # 1 best model for each number of predictors
-               nvmax = NULL,    # NULL for no limit on number of variables
-               force.in = NULL, force.out = NULL,
-               method = "exhaustive")
-
-summary.out <- summary(regsubsets.out)
-as.data.frame(summary.out$outmat)
-library(car)
-subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+subsets(regsubsets.out, statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 
 
-```{r}
-library(leaps)
-regsubsets.out <-
-    regsubsets(Weight ~ .,
-               data = FishiesS,
-               nbest = 1,       # 1 best model for each number of predictors
-               nvmax = NULL,    # NULL for no limit on number of variables
-               force.in = NULL, force.out = NULL,
-               method = "exhaustive")
-
-summary.out <- summary(regsubsets.out)
-as.data.frame(summary.out$outmat)
-library(car)
-subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
-```
-
-## Inferential Results
+## Inferential Results for Perch
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+  
+```{r}
+model.1 <- lm(Weight~Length2+Width,data=Fishies)
+summary.lm(model.1)
+```
 
 # Discussion and Conclusion
 
