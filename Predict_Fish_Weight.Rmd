@@ -96,6 +96,54 @@ model.1 <- lm(Weight~Length2+Width,data=Fishies)
 summary.lm(model.1)
 ```
 
+### Graphical Descriptive Results for Bream
+
+```{r}
+FishiesB=filter(Fishdata, Species =="Bream")
+FishiesB=select(FishiesB,-Species)
+pairs(FishiesB)
+```
+
+### Numerical Descriptive Results for Bream
+
+```{r}
+summary(FishiesB)
+```
+
+
+
+```{r}
+Breammodel2=lm(Weight~Length1+ Width,data=FishiesB)
+summary(Breammodel2)
+```
+
+
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = FishiesB,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+```
+
+
+## Inferential Results for Bream
+
+  
+```{r}
+model.2 <- lm(Weight~Length1+Width,data=Fishies)
+summary.lm(model.2)
+```
+
+
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
