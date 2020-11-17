@@ -143,6 +143,49 @@ model.2 <- lm(Weight~Length1+Width,data=Fishies)
 summary.lm(model.2)
 ```
 
+### Graphical Descriptive Results for Smelt
+
+```{r}
+FishiesS=filter(Fishdata, Species =="Smelt")
+FishiesS=select(FishiesS,-Species)
+pairs(FishiesS)
+```
+
+### Numerical Descriptive Results for Smelt
+
+
+```{r}
+summary(FishiesS)
+```
+
+
+```{r}
+Smeltmodel3=lm(Weight~Length3+ Width,data=FishiesS)
+summary(Smeltmodel3)
+```
+
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = FishiesS,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+```
+
+## Inferential Results for Smelt
+  
+```{r}
+model.3 <- lm(Weight~Length3+Width,data=Fishies)
+summary.lm(model.3)
+```
 
 # Discussion and Conclusion
 
