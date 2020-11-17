@@ -48,10 +48,8 @@ we are using num~num because the variables we are looking at are all numerical e
 Fishies=filter(Fishdata, Species =="Perch")
 Fishies=select(Fishies,-Species)
 pairs(Fishies)
-```
-
-
-
+``` 
+The best plot for the  linear model of species "Perch" according to the above chart appears to be Length 2
 
 ### Numerical Descriptive Results for Perch
 
@@ -85,16 +83,32 @@ library(car)
 subsets(regsubsets.out, statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 
+In the above numerical graphs for Perch the summary chart appears to show the 
+Max. weight of 1100.0 oz   Max. Length of 44.00 for the lm for length2, a
+Max. Height of 12.800 in. and a Max. width of 8.142 in
+
+The perch model shows an adj r-squared prediction of 0.9341 which is pretty close
+to our highest regression.
+
+In the above subset model it appears that subset size 2 @ 0.9400 adjr2 
+calculates that Height and width give the best  predictor of models.
+
 
 ## Inferential Results for Perch
 
-<!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+<!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfies the assumptions and is appropriate to answer the research question!-->
 
   
 ```{r}
 model.1 <- lm(Weight~Length2+Width,data=Fishies)
 summary.lm(model.1)
 ```
+
+The inferential test above agrees with the adjr2 prediction of 0.9341
+
+## Build the best regression model you can that predicts the weight of Bream
+## Using only two predictor variables 
+
 
 ### Graphical Descriptive Results for Bream
 
@@ -104,18 +118,27 @@ FishiesB=select(FishiesB,-Species)
 pairs(FishiesB)
 ```
 
+In the above Graphical descriptive result chart for "Bream" it appears that 
+length 1 would give us the best model for prediction.
+
+
 ### Numerical Descriptive Results for Bream
 
 ```{r}
 summary(FishiesB)
 ```
 
-
+In the above summary we have a max. weight of 1000 oz with a max length of 
+38 in. using the Length1 variable and a max Height of 18.96 in. and a max
+width of 6.8 in.
 
 ```{r}
 Breammodel2=lm(Weight~Length1+ Width,data=FishiesB)
 summary(Breammodel2)
 ```
+
+In the Bream model 2 above we see an adjr2 of 0.9084 which is a bit lower than 
+the Perch at 0.9431.
 
 
 ```{r}
@@ -134,14 +157,25 @@ library(car)
 subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 
+In the subset chart above we can see at a subset size of 2 variables that 
+Length2 and Height would be the best model to predict the results.  
+It appears we have an adjr2 score of 0.934 with a multiple rsquare of 0.9137. 
+
 
 ## Inferential Results for Bream
 
   
 ```{r}
-model.2 <- lm(Weight~Length1+Width,data=Fishies)
+model.2 <- lm(Weight~Length1+Width,data=FishiesB)
 summary.lm(model.2)
 ```
+
+The inferential chart above appears to have an adjr2 prediction of 0.9084 still 
+showing that the "Perch" is the best predicted model of the two species.  
+
+## Build the best regression model you can that predicts the weight of Smelt
+## Using only two predictor variables 
+
 
 ### Graphical Descriptive Results for Smelt
 
@@ -151,18 +185,29 @@ FishiesS=select(FishiesS,-Species)
 pairs(FishiesS)
 ```
 
-### Numerical Descriptive Results for Smelt
+In the above graphical descriptive results chart for "Smelt", it appears that
+Length3 would be the best lm to make a prediction.
 
+### Numerical Descriptive Results for Smelt
 
 ```{r}
 summary(FishiesS)
 ```
+
+In the above summary chart for species "Smelt", it would appear that the
+max weight for Smelt is 19.9 oz with a max length of 16.2 in. according to the 
+Length3 lm.  and a max Height of 2.9 in. and a max Width of 2.1 in.
 
 
 ```{r}
 Smeltmodel3=lm(Weight~Length3+ Width,data=FishiesS)
 summary(Smeltmodel3)
 ```
+
+The model3 above for Smelt appears to have an adjr2 of  0.95551
+which is higher than our first prediction model of 0.9341; possibly
+being the best model for prediction altogether.
+
 
 ```{r}
 library(leaps)
@@ -180,13 +225,19 @@ library(car)
 subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 
+when we observe the subset chart it appears that the subset size of 2 
+variables, shows that Length2 and Width are the best two variables to make a 
+prediction at an adjr2 of 0.9551
+
 ## Inferential Results for Smelt
   
 ```{r}
-model.3 <- lm(Weight~Length3+Width,data=Fishies)
+model.3 <- lm(Weight~Length3+Width,data=FishiesS)
 summary.lm(model.3)
 ```
 
+The inferntial chart above for Smelt appears to also have an adjr2 of 0.9551.
+
 # Discussion and Conclusion
 
-<!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+<!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variables causes the other, or whether they perhaps are related for some other reason.  Watch the chapter 6 videos from the George Town videos collection.!-->
