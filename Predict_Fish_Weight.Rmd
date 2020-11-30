@@ -31,7 +31,8 @@ Fishdata=read.csv("Fish.csv", header = TRUE)
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
-we are using num~num because the variables we are looking at are all numerical explanatory variables.
+we are using num~num because the variables we are looking at, are all numerical
+explanatory variables.
 
 #Results
 
@@ -50,12 +51,11 @@ Fishies=select(Fishies,-Species)
 pairs(Fishies)
 ``` 
 The best plot for the  linear model of species "Perch" according to the above 
-chart appears to be Length 2
+chart appears to be Height.
 
 ### Numerical Descriptive Results for Perch
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
-
 
 ```{r}
 summary(Fishies)
@@ -72,8 +72,8 @@ summary(Perchmodel)
 ```
 
 
-The perch model shows an adj r-squared prediction of 0.9341 which is pretty close
-to our highest regression.
+The perch linear model shows an adj r-squared prediction of 0.9341 which is pretty
+close to our highest regression.
 
 ```{r}
 library(leaps)
@@ -91,8 +91,10 @@ library(car)
 subsets(regsubsets.out, statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 
-In the above subset model it appears that subset size 2 @ 0.9400 adjr2 
-calculates that Height and width  variables give the best  predictor of models.
+In the above leaps model it appears that the subset size of 2 variables gives us 
+a statistical, adjr2 of 0.9400.  It indicates that the Height and width are
+the best two variables for the models to predict the weight of the "Perch". 
+This is the best subset regression for "Perch"
 
 
 ## Inferential Results for Perch
@@ -105,10 +107,10 @@ model.1 <- lm(Weight~Length2+Width,data=Fishies)
 summary.lm(model.1)
 ```
 
-The inferential test above agrees with the adjr2 prediction of 0.9341,using the 
-variables...weight, length 2, and width.  Therefore, it would appear that the 
+The inferential test above agrees with the adjr2 prediction of 0.9341 adjr2, 
+using the variables...Height and width.  Therefore, it would appear that the 
 subset chart using only variables height and width having an adj score 0f 
-0.9400 would be the best model to make the best prediction.
+0.9400 would be the best model to make the best prediction of weight for "Perch"
 
 ## Build the best regression model you can that predicts the weight of Bream
 ## Using only two predictor variables 
@@ -123,7 +125,8 @@ pairs(FishiesB)
 ```
 
 In the above Graphical descriptive result chart for "Bream" it appears that 
-length 1 would give us the best model regression to tesdt the prediction.
+Length1 and Width would give us the best model regression to test the
+prediction.
 
 
 ### Numerical Descriptive Results for Bream
@@ -159,9 +162,13 @@ library(car)
 subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 
-In the subset chart above we can see at a subset size of 2 variables that 
-Length2 and Height would be the best variables to predict the results.  
-It appears we have an adjr2 score a little above 0.935.
+
+In the above leaps model it appears that the subset size of 2 variables gives us 
+a statistical, adjr2 of 0.935.  It indicates that the Length2 and Height are
+the best two variables for the models to predict the weight of the "Bream". 
+This is the best subset regression for "Bream"
+
+
 
 
 ## Inferential Results for Bream
@@ -172,10 +179,12 @@ model.2 <- lm(Weight~Length1+Width,data=FishiesB)
 summary.lm(model.2)
 ```
 
-The inferential chart above appears to have an adjr2 prediction of 0.9084 still 
-which agrees with the Model2 above.  It appears that the variables for the
-bream that best predict using the subset model is Length2 and Height with 
-and adjr2 of a little above 0.0935.  
+The inferential chart above appears to have an adjr2 prediction of 0.9084,
+using the variables Length1 and width. This is significantly lower than the 
+leaps regression model that uses the two variables Length2 and Height with
+an adjr2 of 0.935.  It appears that the variables for the bream that best
+predict the weight using the leaps subset model is Length2 and Height with
+and adjr2 of 0.935. The leaps is the best subset regression model. 
 
 ## Build the best regression model you can that predicts the weight of Smelt
 ## Using only two predictor variables 
@@ -189,8 +198,11 @@ FishiesS=select(FishiesS,-Species)
 pairs(FishiesS)
 ```
 
-In the above graphical descriptive results chart for "Smelt", it appears that
-Length3 would be the best lm to make a prediction.
+In the above Graphical descriptive result chart for "Smelt" it appears that 
+Length3 and Height would be the best two variables to give us the best model
+regression to test the predicted weight for Smelt.
+
+
 
 ### Numerical Descriptive Results for Smelt
 
@@ -204,11 +216,11 @@ Length3 lm.  and a max Height of 2.9 in. and a max Width of 2.1 in.
 
 
 ```{r}
-Smeltmodel3=lm(Weight~Length3 + Width,data=FishiesS)
+Smeltmodel3=lm(Weight~Length3 + Height,data=FishiesS)
 summary(Smeltmodel3)
 ```
 
-The model3 above for Smelt appears to have an adjr2 of  0.9551
+The model3 above for Smelt appears to have an adjr2 of  0.9307
 
 
 ```{r}
@@ -227,21 +239,21 @@ library(car)
 subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 
-when we observe the subset chart it appears that the subset size of 2 
-variables, shows that Length2 and Width are the best two variables to make a 
-prediction at an adjr2 of 0.965.  Therefore, Length3 would not be the best
-variable to get the best prediction.  
+
+In the above leaps model it appears that the subset size of 2 variables gives us 
+a statistical, adjr2 of 0.9645.  It indicates that the Length2 
+and Width are the best two variables for the models to predict the weight of the
+"Smelt". This is the best subset regression for "Smelt" 
 
 ## Inferential Results for Smelt
   
 ```{r}
-model.3 <- lm(Weight~Length3+Width,data=FishiesS)
+model.3 <- lm(Weight~Length3+Height,data=FishiesS)
 summary.lm(model.3)
 ```
 
-The inferential chart above for Smelt appears to have an adjr2 of 0.9551  
-using the variable Length3 which is lower than the 0.965 in the adjr2 subset 
-chart above.
+The inferential chart above for Smelt appears to have an adjr2 of 0.9307  
+using the two variables Length3 and Height.  
 
 # Discussion and Conclusion
 
@@ -249,34 +261,26 @@ chart above.
 
 In conclusion the best regression model appears to be as follows.
 
-# Conclusion for Perch
+# Conclusion 
 
-For the Perch species it appears the best regression model in scatter
-plots is that of variable Length2 and appears to be the best variable to use, 
-along with weight and adding width.
-Using these variables for our summary perch model1 and our sub-set models, 
-it would appear that the best model to use would be the subset model with an 
-adjr2 0f 0.9400.  
+According to the leaps subset model, the two best variables for the "Perch" are
+Height and Width.  This model is the best subset regression for "Perch" with an
+adjr2 of 0.9400.
 
-For the Bream species it appears the best regression model would include 
-the variable Length1 along with the variables Weight and width.
-Using these variables for our summary Bream model2 and our sub-set models, 
-it would appear that the best model to use would be the subset model with an 
-adjr2 0f 0.934. The Breammodel2 and the Inferential test had an adjr2 of 0.9084.
+According to the leaps model for "Bream" it appears that the Length2 and Height 
+are the best two variables for the models to predict the weight of the "Bream", 
+with a statistical, adjr2 of 0.935. This is the best subset regression for
+"Bream".
 
-For the Smelt species, it appears the best regression model in scatter
-plots is that of variable Length3 and appears to be the best variable to use, 
-along with weight and adding width.  However, Using these variables for our
-summary Smeltmodel3 and our sub-set models, it would appear that the best 
-variable would not be Length3 to make the prediction, but instead, according 
-to the subset adj rsqr2 model, it appears that Length2 and width are the best 
-variables giving the highest adj rsqr2 0f 0.965, making it to be the best
-regression model of prediction. The models smeltmodel2 and the inferential 
-model show a lower adjr2 of 0.9551 which is lower than the 0.965 from the 
-subset model.
 
-It appears that the best model for all three species was the subset adjr2 
-models.
+According to the leaps model for "Smelt" it appears that the subset size of 2 
+variables Length2 and Width are the best two variables for the best Regression
+Model giving us a statistical, adjr2 of 0.9645.  It indicates that the Length2 
+and Width are the best two variables for the models to predict the weight of the
+"Smelt". This is the best subset regression for "Smelt" 
+
+
+
 
 
 
